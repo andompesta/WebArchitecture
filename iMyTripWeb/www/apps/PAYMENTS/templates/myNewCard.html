@@ -1,0 +1,25 @@
+<%= '' %>
+<div id="myNewCardDlg">
+    <div style="text-align: center; border-top-left-radius: 7px; border-top-right-radius: 7px; color: #ffffff; background-color:#7c7c7c;">
+        <h3>Nuovo mezzo di pagamento</h3>
+    </div>
+    <form id="frmNewCard">
+        <div style="height: 200px; overflow:auto;" >
+            <div style="margin: 6px; margin-left: 12px;" class="clearfix">
+                <select id="tipoCarta" placeholder="Tipo ">
+                    <option value="VISA">VISA</option>
+                    <option value="MAESTRO">MAESTRO</option>
+                    <option value="MASTERCARD">MASTERCARD</option>
+                    <option value="PAY PAL">PAY PAL</option>
+                <select>
+            </div>
+            <div style="margin: 6px; margin-left: 12px;" class="clearfix">
+                <input id="newCodiceCarta" placeholder="Numero Carta">
+            </div>
+        </div>
+        <p>
+            <button id="btBuy2" style="margin: 6px; float: right;" class="btn" type="submit" >&nbsp;Ok&nbsp;</button>
+            <button style="margin: 6px; float: right;" class="btn" type="reset" >Cancel</button>
+        </p>
+    </form>
+</div>

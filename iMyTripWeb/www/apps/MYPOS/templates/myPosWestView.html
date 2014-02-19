@@ -1,0 +1,20 @@
+<%= '' %>
+<ul class="nav nav-pills" style="margin-bottom: 0px;">
+    <li class="active">
+        <a id="navArea" href="#">Di zona</a>
+    </li>
+    <li >
+        <a id="navPersonal" href="#">Personali</a>
+    </li>
+</ul>
+<ul id="listArea" class="nav nav-list bs-docs-sidenav" style="display:block;" style="overflow: auto; margin-bottom: 0px;">
+    <li><a href="#" data='null'><i class="icon-chevron-right"></i>Dove sono ora</a></li>
+    <% _.each(generalPosition, function(position) {  %>
+    <li><a href="#" data='{"idLocalita":"<%= position.idLocalita %>","lat":<%= position.latitudine %>, "long":<%= position.longitudine %>, "descr":"<%= position.descrizione%>", "removable":false}'><i class="icon-chevron-right"></i><%= position.descrizione %></a></li>
+    <% }); %>
+</ul>
+<ul id="listPersonal" class="nav nav-list bs-docs-sidenav" style="display:none;" style="overflow: auto; margin-bottom: 0px;">
+    <% _.each(personalPositions, function(position) {  %>
+    <li><a href="#" data='{"idLocalita":"<%= position.idLocalita %>","lat":<%= position.latitudine %>, "long":<%= position.longitudine %>, "descr":"<%= position.descrizione %>", "removable":true}'><i class="icon-chevron-right"></i><%= position.descrizione %></a></li>
+    <% }); %>
+</ul>

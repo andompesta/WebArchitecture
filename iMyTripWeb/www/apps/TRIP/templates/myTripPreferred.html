@@ -1,0 +1,21 @@
+<%= '' %>
+<h5><div id='searchTo' style='text-align: center; width: 100%; height: 20px;'></div> </h5>
+<ul class="nav nav-pills" style="margin-bottom: 0px;">
+    <li class="active">
+        <a id="navArea" href="#">Di zona</a>
+    </li>
+    <li >
+        <a id="navPersonal" href="#">Personali</a>
+    </li>
+</ul>
+<button  class="btn btn-danger" id="btClose" style="margin-top:-32px; margin-right: 10px; float:right;">Chiudi</button>
+<ul id="listArea" class="nav nav-list bs-docs-sidenav" style="display:block;" style="overflow: auto; margin-bottom: 0px;">
+    <% _.each(generalPosition, function(position) {  %>
+    <li><a href="#" data='{"lat":<%= position.latitudine %>, "long":<%= position.longitudine %>}'><i class="icon-chevron-right"></i><%= position.descrizione %></a></li>
+    <% }); %>
+</ul>
+<ul id="listPersonal" class="nav nav-list bs-docs-sidenav" style="display:none;" style="overflow: auto; margin-bottom: 0px;">
+    <% _.each(personalPositions, function(position) {  %>
+    <li><a href="#" data='{"lat":<%= position.latitudine %>, "long":<%= position.longitudine %>}'><i class="icon-chevron-right"></i><%= position.descrizione %></a></li>
+    <% }); %>
+</ul>

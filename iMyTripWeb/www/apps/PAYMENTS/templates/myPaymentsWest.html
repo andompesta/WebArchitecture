@@ -1,0 +1,30 @@
+<%=  '' %>
+</br>
+<div style="font-size: 12px; background-color: #f5f5f5; max-height: 250px; overflow:auto;" >
+    <table id="payments" class="table table-condensed table-hover" >
+        <caption>Selezionare mezzo di pagamento</caption>
+        <thead>
+        <tr class="success">
+            <th>Tipo</th>
+            <th>Codice</th>
+            <th>Addebiti</th>
+            <th>Sel.</th>
+        </tr>
+        </thead>
+        <tbody >
+        <% _.each(conti, function(conto) {  %>
+        <tr>
+            <td><%=conto.tipo%></td>
+            <td style="text-align: right;"><%=conto.codiceCarta%></td>
+            <td style="text-align: right;"><% print(new NumberFormat(conto.saldo).toFormatted()) %>&nbsp;EUR</td>
+            <td>
+                <input type="radio" name="idConto" value="<%= conto.idConto + '' %>"/>
+            </td>
+        </tr>
+        <% }); %>
+        </tbody>
+    </table>
+    <button id="addCard" style="margin: 6px; " class="btn" type="button">Nuova</button>
+    <button id="removeCard" style="margin: 6px; " class="btn" type="button">Rimuovi</button>
+    <p>
+</div>

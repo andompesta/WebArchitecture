@@ -1,0 +1,42 @@
+<%= '' %>
+<div id="transportType" class="btn-group" style="margin: 2px; margin-left: 56px">
+    <button data-content="transit" class="btn active" title="Autobus"><img src="library/images/bus.png"/></button>
+    <button data-content="bicycling" class="btn" title="Bicicletta"><img src="library/images/bike.png"/></button>
+    <button data-content="walking" class="btn" title="A piedi"><img src="library/images/walk.png"/></button>
+    <button data-content="driving" class="btn" title="Automobile"><img src="library/images/car.png"/></button>
+</div>
+<hr class="separator">
+<form id="frmSearch">
+    <div id="depature" style="margin-top: 4px;" class="btn-group">
+        <button class="btn btn-mini" onclick="return false;">Partenza da:</button>
+        <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
+            <span class="caret"></span>
+        </button>
+        <ul id="departureType" style="background-color: lightGoldenrodYellow" class="dropdown-menu">
+            <li><a tabindex="-1" href="#" data-content="ADDRESS" >Indirizzo</a></li>
+            <li><a tabindex="-1" href="#" data-content="POSITION" >Posizione attuale</a></li>
+            <li><a tabindex="-1" href="#" data-content="PREFERRED" >Preferiti</a></li>
+        </ul>
+    </div>
+    <span id="departureMode" style="margin-left: 2px">Indirizzo</span>
+    <input id="departureAddress" type="text" style="width: 280px;">
+    <hr class="separator">
+    <div id="arrival" style="margin-top: 4px;" class="btn-group">
+        <button class="btn btn-mini" onclick="return false;">Arrivo a:</button>
+        <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
+            <span class="caret"></span>
+        </button>
+        <ul id="arrivalType" style="background-color: lightGoldenrodYellow" class="dropdown-menu">
+            <li><a tabindex="-1" href="#" data-content="ADDRESS" >Indirizzo</a></li>
+            <li><a tabindex="-1" href="#" data-content="POSITION" >Posizione attuale</a></li>
+            <li><a tabindex="-1" href="#" data-content="PREFERRED" >Preferiti</a></li>
+        </ul>
+    </div>
+    <span id="arrivalMode" style="margin-left: 2px">Indirizzo</span>
+    <input id="arrivalAddress" type="text" style="width: 280px;">
+    <hr class="separator">
+    <input type="time" id="orario">
+    <input type="date" id="data">
+    <input id="buttOk"  class="btn" style="float: right; margin-right: 12px;" title="Cerca soluzione" value="Cerca">
+</form>
+

@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <title>iMyTrip</title>
+        <meta charset="utf-8">
+        <meta http-equiv="Access-Control-Allow-Origin" content="*">
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+        <!-- Turn on telephone number detection. -->
+        <meta name="format-detection" content="telephone=yes">
+        
+        <link   type="text/css" href="library/css/bootstrap.min.css" rel="stylesheet" />
+		<link   type="text/css" href="library/css/bootstrap-responsive.min.css" rel="stylesheet" />
+        <link   type="text/css" href="library/css/promptumenu.css" rel="stylesheet" />
+        <link   type="text/css" href="library/css/zebra_dialog.css"  rel="stylesheet"/>
+        <link   type="text/css" href="library/css/utility.css"  rel="stylesheet"/>
+      
+        <script type="text/javascript" charset="utf-8" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+        <script type="text/javascript" charset="utf-8" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+        <script type="text/javascript" charset="utf-8" src="library/js/jquery-1.8.2.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="library/js/bootstrap.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="library/js/phoneDialer.js"></script>
+        <script type="text/javascript" charset="utf-8" src="library/js/cordova-2.2.0.js"></script>
+        <script type="text/javascript" charset="utf-8" src="library/js/jquery.tmpload-v3.0.js"></script>
+        <script type="text/javascript" charset="utf-8" src="library/js/zebra_dialog.js"></script>
+        <script type="text/javascript" charset="utf-8" src="library/js/underscore.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="library/js/backbone.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="library/js/jlayout.border.js"></script>
+        <script type="text/javascript" charset="utf-8" src="library/js/jquery.jlayout.js"></script>
+        <script type="text/javascript" charset="utf-8" src="library/js/simplemodal.js"></script>
+        <script type="text/javascript" charset="utf-8" src="library/js/promptumenu.js"></script>
+        <script type="text/javascript" charset="utf-8" src="library/js/jquery.sizes.js"></script>
+        <script type="text/javascript" charset="utf-8" src="library/js/require.js"></script>
+        <script type="text/javascript" charset="utf-8" src="library/js/numberFormat154.js"></script>
+
+        <script type="text/javascript" charset="utf-8" src="library/js/utils.js"></script>
+        <script type="text/javascript" charset="utf-8" src="library/js/backboneExt.js"></script>
+        <script type="text/javascript" charset="utf-8" src="library/js/index.js"></script>
+
+        <script type="text/javascript" charset="utf-8" src="apps/MYPOS/js/models/myPosModel.js"></script>
+        <script type="text/javascript" charset="utf-8" src="apps/MYPOS/js/views/myPosCenterView.js"></script>
+
+
+        <style type="text/css">
+            html, body {
+                width: 100%;
+                height: 100%;
+                padding: 0;
+                margin: 0;
+                overflow: hidden;
+            }
+            .layout {
+                height: 100%;
+            }
+            .north {
+                background-color: rgb(220,220,220);
+                border-bottom: 1px solid rgb(200,200,200);
+                display: inline-block;
+            }
+            .west, .east, .south {
+                background-color: rgb(220,220,220);
+                border: 1px solid rgb(200,200,200);
+                display: inline-block;
+                overflow: auto;
+            }
+            .east {
+                display: inline-block;
+                background-color: #fafad2;
+                border: 1px solid rgb(200,200,200);
+                overflow: auto;
+            }
+            .center {
+                 display: inline-block;
+                 width: 100%;
+                 height: 100%;
+                overflow: auto;
+             }
+
+            /* Non-Retina */
+            @media screen and (-webkit-max-device-pixel-ratio: 1) {
+            }
+
+            /* Retina */
+            @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+                only screen and (-o-min-device-pixel-ratio: 3/2),
+                only screen and (min--moz-device-pixel-ratio: 1.5),
+                only screen and (min-device-pixel-ratio: 1.5) {
+            }
+            /* West area        */
+            .west-win-landscape {
+                display : block;
+                visibility: visible;
+                width: 320px;
+            }
+            .west-win-portrait {
+                display : block;
+                visibility: visible;
+                width: 320px;
+            }
+            .west-iPad-landscape {
+                display : block;
+                visibility: visible;
+                width: 320px;
+            }
+            .west-iPad-portrait {
+                display : block;
+                visibility: visible;
+                width: 320px;
+            }
+            .west-iPhone-landscape {
+                display : block;
+                visibility: visible;
+                width: 480px;
+            }
+            .west-iPhone-portrait {
+                display : block;
+                visibility: visible;
+                width: 320px;
+            }
+            /* East area        */
+            .east-win-landscape {
+                display : block;
+                visibility: visible;
+                width: 320px;
+            }
+            .east-win-portrait {
+                display : block;
+                visibility: visible;
+                width: 320px;
+             }
+            .east-iPad-landscape {
+                display : block;
+                visibility: visible;
+                width: 0px;
+            }
+            .east-iPad-portrait {
+                display : block;
+                visibility: visible;
+                width: 0px;
+             }
+            .east-iPhone-landscape {
+                display : block;
+                visibility: visible;
+                width: 0px;
+            }
+            .east-iPhone-portrait {
+                display : block;
+                visibility: visible;
+                width: 0px;
+            }
+            /* South area        */
+            .south-win-landscape {
+                display : block;
+                visibility: visible;
+                height: 22px;
+            }
+            .south-win-portrait {
+                display : block;
+                visibility: visible;
+                height: 22px;
+            }
+            .south-iPad-landscape {
+                display : block;
+                visibility: visible;
+                height: 28px;
+            }
+            .south-iPad-portrait {
+                display : block;
+                visibility: visible;
+                height: 28px;
+            }
+            .south-iPhone-landscape {
+                display : block;
+                visibility: visible;
+                height: 22px;
+
+            }
+            .south-iPhone-portrait {
+                display : block;
+                visibility: visible;
+                height: 22px;
+            }
+            /* North area        */
+            .north-win-landscape {
+                display : block;
+                height: 36px;
+            }
+            .north-win-portrait {
+                display : block;
+                height: 36px;
+            }
+            .north-iPad-landscape {
+                display : block;
+                height: 36px;
+            }
+            .north-iPad-portrait {
+                display : block;
+                height: 36px;
+            }
+            .north-iPhone-landscape {
+                display : block;
+                height: 36px;
+            }
+            .north-iPhone-portrait {
+                display : block;
+                height: 36px;
+            }
+
+
+            .simplemodal_overlay {
+                background-color:#e3e3e3;
+            }
+            .dialog_iPhone_landscape {
+                border: 1 solid #696969;
+                width:100%;
+                height: 320px;
+                top: 0px;
+                left: 0px;
+                border-radius: 0px;
+                background-color: #ececec;
+            }
+            .dialog_iPhone_portrait {
+                border: 1 solid #696969;
+                width:100%;
+                height: 480px;
+                top: 0px;
+                left: 0px;
+                background-color: #ececec;
+            }
+            .dialog_portrait {
+                border: 1 solid #696969;
+                width:100%;
+                height: 320px;
+                border-radius: 8px;
+                box-shadow: 5px 5px 3px #888888;
+                background-color: #ececec;
+            }
+            .dialog_landscape {
+                border: 1 solid #696969;
+                width:100%;
+                height: 320px;
+                border-radius: 8px;
+                box-shadow: 5px 5px 3px #888888;
+                background-color: #ececec;
+            }
+            #appSelector a {
+                color: #D41515;
+                text-decoration:none;
+                text-shadow: 1px 1px #ffffff;
+            }
+            #appSelector a:link, a:visited {
+                color: #D41515;
+            }
+            #appSelector a:hover, a:active {
+                color: #7C7C7C;
+                text-decoration: none;
+                cursor: pointer;
+            }
+            #appSelector div {
+                text-align:center;
+            }
+            #appSelector p {
+                text-align: center; max-width: 90px; text-overflow:ellipsis; white-space:nowrap; overflow:hidden; font-family:Helvetica Arial,sans-serif; font-size: 12px;"
+            }
+
+            .nord-title {
+                position: absolute;       /* take element out of the normal page flow! */
+                top: 4px;                /* position the element vertically using top or bottom and define width as you like:*/
+                width: 50%;
+                left: 0;                  /* set left and right to the same value! */
+                right: 0;
+                margin-left: auto;        /* adding auto-margins left and right will center the element horizontally!*/
+                margin-right: auto;
+                text-align: center;
+                color: white;
+                text-shadow: 1px 1px #acacac;
+                font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+                font-size: 18px;
+            }
+            .red-background {
+                background: #ff361c; /* Old browsers */
+                background: -moz-linear-gradient(top,  #ff361c 0%, #ea2420 100%); /* FF3.6+ */
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff361c), color-stop(100%,#ea2420)); /* Chrome,Safari4+ */
+                background: -webkit-linear-gradient(top,  #ff361c 0%,#ea2420 100%); /* Chrome10+,Safari5.1+ */
+                background: -o-linear-gradient(top,  #ff361c 0%,#ea2420 100%); /* Opera 11.10+ */
+                background: -ms-linear-gradient(top,  #ff361c 0%,#ea2420 100%); /* IE10+ */
+                background: linear-gradient(to bottom,  #ff361c 0%,#ea2420 100%); /* W3C */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff361c', endColorstr='#ea2420',GradientType=0 ); /* IE6-9 */
+            }
+            .gray-background {
+                background: #fcfff4; /* Old browsers */
+                background: -moz-linear-gradient(top,  #fcfff4 0%, #dfe5d7 59%, #b3bead 100%); /* FF3.6+ */
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fcfff4), color-stop(59%,#dfe5d7), color-stop(100%,#b3bead)); /* Chrome,Safari4+ */
+                background: -webkit-linear-gradient(top,  #fcfff4 0%,#dfe5d7 59%,#b3bead 100%); /* Chrome10+,Safari5.1+ */
+                background: -o-linear-gradient(top,  #fcfff4 0%,#dfe5d7 59%,#b3bead 100%); /* Opera 11.10+ */
+                background: -ms-linear-gradient(top,  #fcfff4 0%,#dfe5d7 59%,#b3bead 100%); /* IE10+ */
+                background: linear-gradient(to bottom,  #fcfff4 0%,#dfe5d7 59%,#b3bead 100%); /* W3C */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#b3bead',GradientType=0 ); /* IE6-9 */
+
+            }
+
+            .top-navbar {
+                margin-top: 3px;
+                margin-left: 4px;
+                list-style-type: none;
+                float: left;
+            }
+            .top-navbar li
+            {
+                display: inline;
+                list-style-type: none;
+                padding-right: 2px;
+            }
+            .btnText {
+                display: none;
+            }
+            .bankIcon {
+                margin-top:2px;
+                margin-right: 15px;
+                float: right;
+            }
+            .bankLogo {
+                height: 32px;
+                background-color:white;
+                border-radius: 4px; padding: 1px;
+                margin-top:1px;
+                margin-right: 15px;
+                float: right;
+            }
+            /* Sidenav for Docs
+            -------------------------------------------------- */
+
+            .bs-docs-sidenav {
+                margin: 6px;
+                padding: 0;
+                background-color: #fff;
+                -webkit-border-radius: 6px;
+                -moz-border-radius: 6px;
+                border-radius: 6px;
+                -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.065);
+                -moz-box-shadow: 0 1px 4px rgba(0,0,0,.065);
+                box-shadow: 0 1px 4px rgba(0,0,0,.065);
+            }
+            .bs-docs-sidenav > li > a {
+                display: block;
+
+                margin: 0 0 -1px;
+                padding: 7px 14px 7px;
+                border: 1px solid #e5e5e5;
+            }
+            .bs-docs-sidenav > li:first-child > a {
+                -webkit-border-radius: 6px 6px 0 0;
+                -moz-border-radius: 6px 6px 0 0;
+                border-radius: 6px 6px 0 0;
+            }
+            .bs-docs-sidenav > li:last-child > a {
+                -webkit-border-radius: 0 0 6px 6px;
+                -moz-border-radius: 0 0 6px 6px;
+                border-radius: 0 0 6px 6px;
+            }
+            .bs-docs-sidenav > .active > a {
+                position: relative;
+                z-index: 2;
+                padding: 9px 15px;
+                border: 0;
+                text-shadow: 0 1px 0 rgba(0,0,0,.15);
+                -webkit-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+                -moz-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+                box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+            }
+                /* Chevrons */
+            .bs-docs-sidenav .icon-chevron-right {
+                float: right;
+                margin-top: 2px;
+                margin-right: -6px;
+                opacity: .25;
+            }
+            .bs-docs-sidenav > li > a:hover {
+                background: #f5f5f5; /* Old browsers */
+                background: -moz-linear-gradient(top,  #f5f5f5 0%, #e8e8e8 100%); /* FF3.6+ */
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f5f5f5), color-stop(100%,#e8e8e8)); /* Chrome,Safari4+ */
+                background: -webkit-linear-gradient(top,  #f5f5f5 0%,#e8e8e8 100%); /* Chrome10+,Safari5.1+ */
+                background: -o-linear-gradient(top,  #f5f5f5 0%,#e8e8e8 100%); /* Opera 11.10+ */
+                background: -ms-linear-gradient(top,  #f5f5f5 0%,#e8e8e8 100%); /* IE10+ */
+                background: linear-gradient(to bottom,  #f5f5f5 0%,#e8e8e8 100%); /* W3C */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#e8e8e8',GradientType=0 ); /* IE6-9 */
+
+            }
+            .bs-docs-sidenav a:hover .icon-chevron-right {
+                opacity: .5;
+            }
+            .bs-docs-sidenav .active .icon-chevron-right,
+            .bs-docs-sidenav .active a:hover .icon-chevron-right {
+                background-image: url(library/images/glyphicons-halflings-white.png);
+                opacity: 1;
+            }
+            #map_canvas {
+                height: 100%;
+                width: 100%;
+            }
+            .separator {
+                margin: 1px 0 1px 0;
+                border-top: 1px solid #515151;
+                border-bottom: 1px solid white;
+            }
+            </style>
+
+		<script type='text/javascript'>
+            app.initialize();
+		</script>
+	</head>
+	<body>
+    <div  id="simplemodal" style="display: none;">
+    </div>
+
+    <div id="container"  class="layout">
+        <div id="north" class="north north-win-landscape">
+            <div class="nord-container red-background" >
+                <ul class="top-navbar">
+                    <li >
+                        <button class="btn btn-danger" id="mainMenu" onclick="app.mainMenu();">
+                            <i class="icon-white icon-tasks"></i>
+                            <span class="btnText">&nbsp;Go..&nbsp;</span>
+                        </button>
+                    </li>
+
+                    <li >
+                        <button class="btn btn-danger" id="shiftSidebar" onclick="app.shiftSidebar();">
+                            <i class="icon-white icon-circle-arrow-left"></i>
+                            <span class="btnText">Back</span>
+                        </button>
+                    </li>
+                </ul>
+                <div id="appTitle" class="nord-title">Titolo</div>
+                <ul class="top-navbar" style="float: right">
+                    <li >
+                        <button class="btn btn-danger" id="shiftRightBar" onclick="app.shiftRightBar();">
+                            <i class="icon-white icon-road"></i>
+                            <span class="btnText">Percorso</span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <div id="west" class="west west-win-landscape" style="overflow: auto;">
+
+        </div>
+        <div id="center" class="center">
+
+        </div>
+        <div id="east" class="east">
+
+        </div>
+
+        <div id="south" class="south south-win-landscape gray-background">
+            <div style="float: left; width: 32px; margin-left: 5px; margin-right: 5px; margin-top: 2px"><img id="connectedStatus" width="20px" height="20px" style="margin-top: 2px;" src="library/images/signal-yellow.png"></div>
+            <div id="userConnected" style="float: left; margin-top: 3px;   font-family: Arial; font-size: 12; font-weight: bold; color: #191970"></div>
+            <div style="width: 150px; float: right; margin-top: 2px; margin-right: 5px;" ><img  id="waitIcon" width="150px" height="20px" style="z-index: 100000; display:none;" src="library/images/pleasewait.gif"> </div>
+        </div>
+    </div>
+
+	</body>
+</html>
+		

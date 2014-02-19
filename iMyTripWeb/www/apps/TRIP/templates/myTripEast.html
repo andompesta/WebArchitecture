@@ -1,0 +1,24 @@
+<%= '' %>
+<button  class="btn btn-danger" id="btBuy" style="margin-top:2px; margin-right: 32px; float:right;">Compra biglietto</button>
+
+<div style="display:block; overflow: auto; margin-top: 40px; margin-bottom: 0px;">
+<ul id="listArea" class="nav nav-list bs-docs-sidenav">
+    <li>
+        <p>Partenza   da:&nbsp;<%= tripLeg.start_address %></p>
+        <p>Arrivo      a:&nbsp;<%= tripLeg.end_address %></p>
+        <% if (tripLeg.departure_time != undefined) {
+            print('<p>Partenza alle:&nbsp;' +  tripLeg.departure_time.text+ '</p>');
+        }
+        %>
+        <p>Durata       :&nbsp;<%= tripLeg.duration.text %></p>
+    </li>
+    <hr>
+
+    <% _.each(tripLeg.steps, function(step) {  %>
+    <li>
+        <p><%= step.html_instructions%></p>
+        <hr>
+    </li>
+    <% }); %>
+</ul>
+</div>

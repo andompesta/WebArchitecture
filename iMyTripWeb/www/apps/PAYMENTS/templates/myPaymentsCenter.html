@@ -1,0 +1,40 @@
+<%= '' %>
+
+<div style="width:  99%; text-align: center; border-top-left-radius: 7px; border-top-right-radius: 7px; color: #ffffff; background-color:#7c7c7c;">
+    <span style="font-size: 16; font-weight: bold; color: #ffffff;  ">Dati relativi al mezzo di pagamento</span>
+</div>
+<div style="border: 1px solid #d3d3d3; width:  99%; height: 32px; background-color: #fafad2">
+    <div style="float: left; margin: 6px; margin-left: 12px;" class="clearfix">
+        <span id="tipo"><%= conto.tipo %></span>
+    </div>
+    <div style="float: left; margin: 6px; margin-left: 12px;" class="clearfix">
+        <span id="idConto" ><%= conto.idConto %></span>
+    </div>
+    <div style="float: left; margin: 6px; margin-left: 12px;" class="clearfix">
+        <span id="codiceCarta" ><%= conto.codiceCarta %></span>
+    </div>
+    <div style="float: left; margin: 6px; margin-left: 12px;" class="clearfix">
+        <span id="saldo" ><% print('Saldo : ' + new NumberFormat(conto.saldo).toFormatted())  %>&nbsp;EUR</span>
+    </div>
+</div>
+<div style="border: 1px solid #d3d3d3; width: 99%;  background-color: #e6e6fa: font-size: 12px;">
+    <table  id="payments" class="table table-condensed table-hover" width="99%" >
+        <thead>
+        <tr class="success">
+            <th width="150px">Data</th>
+            <th>Descrizione</th>
+            <th width="100px">Importo</th>
+        </tr>
+        </thead>
+        <tbody >
+        <% _.each(movimenti, function(movimento) {  %>
+        <tr>
+            <td><%=movimento.data%></td>
+            <td style="text-align: left;"><%  print(movimento.descrizione.replace(new RegExp("\n","g"),"<br>")); %></td>
+            <td style="text-align: right;"><% print(new NumberFormat( movimento.importo ).toFormatted()) %>&nbsp;EUR</td>
+        </tr>
+        <% }); %>
+        </tbody>
+    </table>
+</div>
+

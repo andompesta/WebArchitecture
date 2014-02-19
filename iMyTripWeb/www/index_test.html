@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Google Maps JavaScript API v3 Example: Directions Simple</title>
+   
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+	<style>
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#map_canvas {
+  height: 100%;
+}
+
+@media print {
+  html, body {
+    height: auto;
+  }
+
+  #map_canvas {
+    height: 650px;
+  }
+}
+</style>
+<script>
+    
+    
+    var directionsDisplay ;
+    var directionsService = new google.maps.DirectionsService();
+    var map;
+    var flightPaths = [];
+
+    $(document).ready(function() {
+        $.support.cors= true;              
+        directionsDisplay = new google.maps.DirectionsRenderer();
+        var trento = new google.maps.LatLng(46.061150, 11.135320);
+        var mapOptions = {
+            zoom:14,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            center: trento
+        }
+        map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+        directionsDisplay.setMap(map);
+    });
+
+    function calcRoute() {
+        var start = document.getElementById('start').value;
+        var dt = eval ('new  ' + start);
+        var millsec = dt.getTime() / 1000;
+
+        var tripRequest = {
+            "Sensor":"false",
+            "Origin":{"Street":"via Padova 20","ZipCode":"38122","Venue":"Trento","Region":"Trentino","Country":"Italy","Area":""},
+            "Destination":{"Street":"","ZipCode":"","Venue":"","Region":"","Country":"","Area":""},
+            "Mode":"WALKING",
+            "DepartureTimeMs": millsec,
+            "ArrivalTimeMs":0
+        };
+        
+        try {
+            $.ajax({
+                type:'POST',
+                data: JSON.stringify(tripRequest),
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                timeout: 30000,
+                cache: false,
+                url:"http://localhost:8080/iMyTrip/webresources/rest/computeRoute",
+                error:function(jqxhr,textStatus,error) {
+                    console.log(error);
+                    alert(textStatus + " " + error.message);
+                },
+                success: function(data){    
+                    for (var j = 0; j < flightPaths.length; j++) {
+                            flightPaths[j].setPath([]);
+                    } 
+
+                    console.log(JSON.stringify(data));
+                    for (var i = 0; i < data.routes[0].legs[0].steps.length; i++) {
+                        alert(data.routes[0].legs[0].steps[i].distance.text + ' ' + data.routes[0].legs[0].steps[i].duration.text + ' ' + data.routes[0].legs[0].steps[i].travel_mode);
+
+                        var plcolor = "#FF0000";
+                        switch(data.routes[0].legs[0].steps[i].travel_mode) {
+                                case 'WALKING':
+                                        plcolor = "#00FF00";
+                                        break;
+                                default:
+                                        break;
+                        }
+                        var flightPlanCoordinates = decodeLine( data.routes[0].legs[0].steps[i].polyline.points);
+                        var flightPath = new google.maps.Polyline({
+                                path: flightPlanCoordinates,
+                                strokeColor: plcolor,
+                                strokeOpacity: 1.0,
+                                strokeWeight: 2
+                        });
+                        flightPaths.push(flightPath);
+                        flightPath.setMap(map);
+                    }
+                }
+            });
+            
+        } catch (e) {
+            alert(e);
+        }
+    }
+    // http://facstaff.unca.edu/mcmcclur/googlemaps/encodepolyline/decode.js
+    // This function is from Google's polyline utility.
+    function decodeLine (encoded) {
+        var len = encoded.length;
+        var index = 0;
+        var array = [];
+        var lat = 0;
+        var lng = 0;
+
+        while (index < len) {
+        var b;
+        var shift = 0;
+        var result = 0;
+        do {
+          b = encoded.charCodeAt(index++) - 63;
+          result |= (b & 0x1f) << shift;
+          shift += 5;
+        } while (b >= 0x20);
+        var dlat = ((result & 1) ? ~(result >> 1) : (result >> 1));
+        lat += dlat;
+
+        shift = 0;
+        result = 0;
+        do {
+          b = encoded.charCodeAt(index++) - 63;
+          result |= (b & 0x1f) << shift;
+          shift += 5;
+        } while (b >= 0x20);
+        var dlng = ((result & 1) ? ~(result >> 1) : (result >> 1));
+        lng += dlng;
+
+        // LJR modified to return array of LatLngs 
+        array.push(new google.maps.LatLng(lat * 1e-5, lng * 1e-5));
+        }
+
+        return array;
+    }
+
+</script>
+</head>
+  <body>
+    <div>
+    <b>Start: </b>
+    <select id="start" onchange="calcRoute();">
+      <option value="Date(2013, 1, 3, 8, 0, 0, 0) ">8</option>
+      <option value="Date(2013, 1, 3, 8, 30, 0, 0) ">8.30</option>
+      <option value="Date(2013, 1, 3, 8, 45, 0, 0) ">8.45</option>
+      <option value="Date(2013, 1, 3, 9, 0, 0, 0) ">9</option>
+      <option value="Date(2013, 1, 3, 9, 12, 0, 0) ">9.12</option>
+       
+    </select>
+    
+    </div>
+    <div id="map_canvas" style="top:30px;"></div>
+  </body>
+</html>
