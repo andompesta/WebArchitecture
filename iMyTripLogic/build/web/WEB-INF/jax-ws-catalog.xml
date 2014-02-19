@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://localhost:8080/iMyTripServiceReal/SOAPGoogle?wsdl" uri="wsdl/localhost_8080/iMyTripServiceReal/SOAPGoogle.wsdl"/>
+    <system systemId="http://localhost:8080/iMyTripServiceReal/SOAPGoogle?xsd=1" uri="wsdl/localhost_8080/iMyTripServiceReal/SOAPGoogle.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/iMyTripServiceReal/SOAPAccount?wsdl" uri="wsdl/localhost_8080/iMyTripServiceReal/SOAPAccount.wsdl"/>
+    <system systemId="http://localhost:8080/iMyTripServiceReal/SOAPAccount?xsd=1" uri="wsdl/localhost_8080/iMyTripServiceReal/SOAPAccount.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/iMyTripService/NewWebService?wsdl" uri="wsdl/localhost_8080/iMyTripService/NewWebService.wsdl"/>
+    <system systemId="http://localhost:8080/iMyTripService/NewWebService?xsd=1" uri="wsdl/localhost_8080/iMyTripService/NewWebService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/iMyTripService/accountSOAP?wsdl" uri="wsdl/localhost_8080/iMyTripService/accountSOAP.wsdl"/>
+    <system systemId="http://localhost:8080/iMyTripService/accountSOAP?xsd=1" uri="wsdl/localhost_8080/iMyTripService/accountSOAP.xsd_1.xsd"/>
+</catalog>

@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is Metro/2.2.0-1 (tags/2.2.0u1-7139; 2012-06-02T10:55:19+0000) JAXWS-RI/2.2.6-2 JAXWS/2.2 svn-revision#unknown. --><xs:schema xmlns:tns="http://googleMapService.serviceSoap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://googleMapService.serviceSoap/">
+
+<xs:element name="getJsonSOAP" type="tns:getJsonSOAP"/>
+
+<xs:element name="getJsonSOAPResponse" type="tns:getJsonSOAPResponse"/>
+
+<xs:element name="getPrezzoTariffeExtraUrbane" type="tns:getPrezzoTariffeExtraUrbane"/>
+
+<xs:element name="getPrezzoTariffeExtraUrbaneResponse" type="tns:getPrezzoTariffeExtraUrbaneResponse"/>
+
+<xs:element name="iMyTripJson" type="tns:iMyTripJson"/>
+
+<xs:element name="iMyTripJsonResponse" type="tns:iMyTripJsonResponse"/>
+
+<xs:element name="rc" type="tns:rc"/>
+
+<xs:element name="tripRequest" type="tns:tripRequest"/>
+
+<xs:complexType name="getJsonSOAP">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getJsonSOAPResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:tripRequest" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="tripRequest">
+<xs:complexContent>
+<xs:extension base="tns:rc">
+<xs:sequence>
+<xs:element name="Sensor" type="xs:boolean" minOccurs="0"/>
+<xs:element name="Origin" type="xs:string" minOccurs="0"/>
+<xs:element name="Destination" type="xs:string" minOccurs="0"/>
+<xs:element name="Mode" type="xs:string" minOccurs="0"/>
+<xs:element name="DepartureTimeMs" type="xs:long" minOccurs="0"/>
+<xs:element name="ArrivalTimeMs" type="xs:long" minOccurs="0"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="rc">
+<xs:sequence>
+<xs:element name="rc" type="xs:int"/>
+<xs:element name="uuid" type="xs:string" minOccurs="0"/>
+<xs:element name="description" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="iMyTripJson">
+<xs:sequence>
+<xs:element name="GoogleRequest" type="tns:tripRequest" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="iMyTripJsonResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:rc" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPrezzoTariffeExtraUrbane">
+<xs:sequence>
+<xs:element name="arg0" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPrezzoTariffeExtraUrbaneResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:float"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
